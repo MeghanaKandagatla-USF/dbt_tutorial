@@ -33,3 +33,5 @@ models:
         tests:
           - accepted_values:
               values: ['Rank1', 'Rank2', 'Rank3', 'Rank4']
+          - name: engineering_rating_check
+          
