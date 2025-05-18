@@ -1,0 +1,35 @@
+
+version: 2
+
+models:
+  - name: my_first_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: my_second_dbt_model
+    description: "A starter dbt model"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: employee_rankings
+    description: "Aggregates employee performance and categorizes them into tiers"
+    columns:
+      - name: employee_id
+        description: "Unique employee ID"
+        tests: [not_null, unique]
+      - name: avg_rating
+        description: "Average of all yearly performance ratings"
+      - name: performance_tier
+        description: "Performance category based on average rating"
+        tests:
+          - accepted_values:
+              values: ['Rank1', 'Rank2', 'Rank3', 'Rank4']
