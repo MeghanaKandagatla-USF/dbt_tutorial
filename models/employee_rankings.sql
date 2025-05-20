@@ -14,6 +14,7 @@ SELECT
     e.department,
     r.avg_rating,
     r.total_bonus,
+    {{ convert_percent('r.total_bonus') }} AS adjusted_bonus,  
     CASE
         WHEN r.avg_rating >= 4.5 THEN 'Rank1'
         WHEN r.avg_rating >= 3.5 THEN 'Rank2'
