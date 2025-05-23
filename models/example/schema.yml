@@ -1,5 +1,12 @@
 version: 2
 
+sources:
+  - name: dbt_tutorial
+    schema: dbo
+    tables:
+      - name: raw_employees
+      - name: raw_performance
+
 models:
   - name: my_first_dbt_model
     description: "A starter dbt model"
@@ -27,10 +34,8 @@ models:
         tests:
           - not_null
           - unique
-
       - name: avg_rating
         description: "Average of all yearly performance ratings"
-
       - name: performance_tier
         description: "Performance category based on average rating"
         tests:
@@ -39,3 +44,45 @@ models:
 
     data_tests:
       - engineering_rating_check_macro: {}
+
+  - name: bonus_variable_example
+    description: "Calculates adjusted_bonus using a set variable multiplier."
+    columns:
+      - name: employee_id
+        description: "Employee ID"
+        tests:
+          - not_null
+      - name: adjusted_bonus
+        description: "Bonus adjusted using variable multiplier"
+
+  - name: bonus_macro_example
+    description: "Uses a macro to calculate adjusted_bonus with a 1.1 multiplier."
+    columns:
+      - name: employee_id
+        description: "Employee ID"
+        tests:
+          - not_null
+      - name: adjusted_bonus
+        description: "Bonus adjusted using macro"
+
+  - name: department_HireDate_filter_example
+    description: "Applies HireDate threshold conditionally based on selected department."
+    columns:
+      - name: employee_id
+        description: "Employee ID"
+      - name: hire_date
+        description: "HireDate filtered based on department"
+
+  - name: loop_select_columns_example
+    description: "Selects employee details using a macro that loops over column names."
+    columns:
+      - name: employee_id
+        description: "Employee ID"
+        tests:
+          - not_null
+      - name: first_name
+        description: "First name of the employee"
+      - name: last_name
+        description: "Last name of the employee"
+      - name: department
+        description: "Department name"
